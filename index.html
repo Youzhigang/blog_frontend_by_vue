@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>myapp</title>
+    <Link type="text/css" rel="stylesheet" 
+    href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <style lang="">
+    *{
+      padding: 0;
+      margin: 0;
+      border-radius: 2px;
+    }
+    
+      li{
+        list-style: none;
+        text-align: left
+      }
+      #app{
+        display: flex;
+        flex: 1
+      }
+.paperbox::before {
+    -webkit-transform: skew(-15deg) rotate(-6deg);
+    -moz-transform: skew(-15deg) rotate(-6deg);
+    transform: skew(-15deg) rotate(-6deg);
+    left: 15px;
+    width: 70%;
+    height: 55%;
+    content:"";
+    -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 10px;
+    z-index: -1;	
+}
+  .paperbox{
+    background-color: #eee;
+    padding: 20%;
+    order: -1;
+    background-color: #fff;
+    border: 1px solid #eee;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.06) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset; 
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+    position: relative;
+    *zoom: 1;
+
+  }
+
+  .paperbox::after{
+    -webkit-transform: skew(15deg) rotate(6deg);
+    -moz-transform: skew(15deg) rotate(6deg);
+    transform: skew(15deg) rotate(6deg);
+    right: 15px;
+    width: 70%;
+    height: 55%;
+    content: ' ';
+    -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 10px;
+    z-index: -1;	
+  }
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
