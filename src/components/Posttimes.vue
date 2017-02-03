@@ -35,12 +35,12 @@ import { mapActions } from 'vuex'
     }
 
 </script>
-<style lang="" scoped>
-i{
-     border-bottom: 1px gray dashed;
-     transition: 0.2s;
+<style lang="stylus" scoped>
+i
+    border-bottom: 1px gray dashed;
+    transition: 0.2s;
      
-}
+
 i:hover{
    
     color:#fff;

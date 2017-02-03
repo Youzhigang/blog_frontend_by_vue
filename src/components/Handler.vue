@@ -42,12 +42,12 @@
                 this.$router.push({ path: '/'})
             },
             drag(event){
-                console.log(event)
+                // console.log(event)
                 // dom = event.currentTarget
                 this.flag=true;
             },
             drop(event){
-                console.log(event)
+                // console.log(event)
                 event.preventDefault();
                 // event.target.appendChild(dom);
             },
@@ -62,9 +62,15 @@
                 if(this.position.x>1150){
                         this.position.x=1150;
                     }
+                if(this.position.x<100){
+                    this.position.x=100;
+                }
                  if(this.position.y>700){
                         this.position.y=700;
                     }
+                 if(this.position.y<100){
+                    this.position.y=100;
+                }
             },
             move(e){
                 e.stopPropagation()
