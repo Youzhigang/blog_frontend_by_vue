@@ -5,9 +5,11 @@ import Main from '../components/Main.vue';
 
 
 export default [{
+  name:'home',
   path: "/",
   component: List
 }, {
+  name:'content',
   path: "/content/:id",
   component: Main
 }]

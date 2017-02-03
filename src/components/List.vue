@@ -1,7 +1,7 @@
 <template>
     <div class="list">
         <h1>Content</h1>
-        <template v-if="list.length==0">
+        <template v-if="!list || list.length==0">
             <h2>Sorry, No result! Only search for the TAG!</h2>
         </template >
         <template v-else>

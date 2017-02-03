@@ -1,19 +1,18 @@
 <template>
-  <div id="app">
+<div id="app">
     <hello></hello>
     <div class="left">
       <Category></Category>
       <Posttime></Posttime>
     </div>
-    
+    <Handler></Handler>
   <div class="content">
-     <router-view
-      
-      transition
-      transition-mode="out-in">
-    </router-view>
+   <transition name="anileft" mode="out-in">
+      <router-view>
+      </router-view>
+    </transition>
   </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -23,6 +22,7 @@ import List from './components/List.vue'
 // import mybutton from './components/button.vue';
 import Category from './components/Categories.vue'
 import Posttime from './components/Posttimes.vue'
+import Handler from './components/Handler'
 
 // axios.default.header={'Access-Control-Allow-Origin':'*'}
 
@@ -33,7 +33,8 @@ export default {
     Hello,
     List,
     Category,
-    Posttime
+    Posttime,
+    Handler,
   },
   created(){
     
@@ -48,6 +49,8 @@ export default {
 </script>
 
 <style>
+
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -65,5 +68,14 @@ export default {
 .content{
    flex: 1;
    
+}
+.content .anileft-transition{
+  transition:2s;
+}
+.content .anileft-enter{
+  transform: translateX(1000%);
+}
+.content .anileft-leave{
+ transform: translateX(1000%);
 }
 </style>

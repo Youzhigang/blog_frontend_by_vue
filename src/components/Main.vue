@@ -76,7 +76,18 @@
   }
 
 </script>
+
 <style lang="" scoped>
+*{
+  line-height:1.5rem;
+   color: #999;
+    word-break: break-all;
+        word-wrap: break-word; 
+        white-space: pre-wrap;
+}
+span{
+  width: 50px;
+}
   .main {
     margin-top: 1%;
     background-color: #eee;
@@ -101,10 +112,7 @@
     font-size: 15px;
   }
   
-  section>p {
-    font-size: 22px;
-    color: blanchedalmond;
-  }
+  
 
   .title{
       color: wheat;
@@ -112,9 +120,9 @@
       padding-bottom: 10px;
       border-bottom: 1px wheat solid;
   }
-  .word code{
+  .word code {
       word-break: break-all;
-        word-wrap: break-word; 
-        white-space: pre-wrap;
+      word-wrap: break-word; 
+      white-space: pre-wrap;
   }
 </style>
