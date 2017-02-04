@@ -34,7 +34,7 @@ const store = new vuex.Store({
             if(payload !== ""){
                 state.result=state.articles.results?
                 state.articles.results.filter(item => item.category==payload):[]
-            }else{
+            }else{ //如果不保存数据,查询为空就会清空数据,此时可以返回数据
                 state.result=JSON.parse(window.sessionStorage.getItem("temp_articles")).results
             }
         },
@@ -57,6 +57,9 @@ const store = new vuex.Store({
         },
         RESET:state=>{
             state.result=state.articles.results
+        },
+        SHUFFLE:state=>{
+            state.articles.results=_.shuffle(state.articles.results)
         }
         
     },

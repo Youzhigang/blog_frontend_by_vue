@@ -1,10 +1,13 @@
 <template>
   <div class="paperbox category">
         <ul>
+        
           <li @click="filter('')"><i class="fa fa-hand-pointer-o" aria-hidden="true">显示所有</i></li>
-            <li v-for="(item,index) in Categories" key="index" >
+           <transition-group name="flip">
+            <li v-for="(item,index) in Categories" :key="item" >
                 <i @click="filter(item)" class="fa fa-tag" aria-hidden="true"> {{item}}</i>
             </li>
+            </transition-group>
         </ul>
   </div>     
 </template>
@@ -40,7 +43,9 @@ import { mapActions } from 'vuex'
 
 </script>
 <style lang="" scoped>
-
+.flip-move {
+  transition: transform 8s;
+}
 i{
      border-bottom: 1px gray dashed;
      transition: 0.2s;

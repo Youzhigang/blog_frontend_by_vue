@@ -5,10 +5,11 @@
             <h2>Sorry, No result! Only search for the TAG!</h2>
         </template >
         <template v-else>
-        <ul>
-            <li class="title" v-for="item in list" key="item.id" @click="linkTo(item.id),say">
-            <i class="fa fa-location-arrow" aria-hidden="true">  {{item.title}}   ||  {{item.category}}</i></li>
-        </ul>
+            <transition-group name="flip-list" tag="ul">
+                <li class="title" v-for="item in list" :key="item.id" @click="linkTo(item.id)">
+                    <i class="fa fa-location-arrow" aria-hidden="true">  {{item.title}}   ||  {{item.category}}</i>
+                </li>
+            </transition-group>
          </template>
     </div>
 </template>
@@ -16,12 +17,26 @@
 
 
 <script>
+Array.prototype.shuffle=function(){
+let newarr = this;
+  for (let i = this.length; i > 0; i--) {
+    let j = Math.floor(Math.random() * i);
+    let x = this[i - 1];
+    newarr[i - 1] = this[j];
+    newarr[j] = x;
+  }
+  return newarr;
+}
+
+import {mapMutations} from 'vuex'
+
     export default{
         name:"titlelist",
         props:{},
-        data:function(){
+        data(){
             return{
-                articles:{},
+                article_list:[],
+                
             }
         },
         computed:{
@@ -31,10 +46,19 @@
                 }else{
                     return this.$store.state.articles.results;
                 }
+            },
+            shuffle(){
+                this.list = _.shuffle(this.list)
             }
         },
-        mounted:function(){
-            this.articles = this.$store.state.articles;
+        created(){
+            this.article_list = JSON.parse(window.sessionStorage.getItem("temp_articles")).results
+            setInterval(()=>{
+                this.SHUFFLE();console.log(123)
+            },10000)
+        },
+        mounted () {
+
         },
         methods: {
             linkTo(val){
@@ -42,13 +66,22 @@
                 this.$router.push({ path: 'content/'+val})
             },
             say(){
-                console.log(123)
-            }
+                this.article_list = _.shuffle(this.article_list)
+            },
+            ...mapMutations([
+                'SHUFFLE'
+            ])
         }
     }
 </script>
 
 <style lang="stylus" scoped>
+
+.flip-list-move {
+  transition: transform 8s;
+}
+
+
 .list{
     margin-top: 1%;
     background-color: #eee;
@@ -69,7 +102,7 @@
 li{
     text-align: left;
     list-style: none;
-   
+    margin-top: 2%;
     transition:0.2s;
 }
 i{
