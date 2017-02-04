@@ -7,7 +7,7 @@
     <template v-else>
          
          <section >
-            <h2 class="title"> {{data.title}}</h2>
+            <h2 class="title"> {{title}}</h2>
             <div class="word" v-html="markdown"></div>
          </section>
     </template>
@@ -17,6 +17,7 @@
   import '../assets/dracula.css'
   import marked from 'marked'
   import axios from 'axios'
+  import store from '../vuex/stores'
 
   marked.setOptions({
     gfm: true,
@@ -35,7 +36,7 @@
     name: "main",
     data() {
       return {
-        loading: true,
+        // loading: true,
         data: {},
         id: null,
       }
@@ -43,13 +44,14 @@
 
     created() {
       this.id = this.$route.params.id;
-      axios.get("http://localhost:8000/articles/" + this.id + "/")
-        .then(res => {
-          this.loading = false;
-          this.data = res.data;
-          console.log(this.data)
-        })
-
+      // axios.get("http://localhost:8000/articles/" + this.id + "/")
+      //   .then(res => {
+      //     this.loading = false;
+      //     this.data = res.data;
+      //     console.log(this.data)
+      //   })
+      console.log("main id"+this.id);
+      this.$store.dispatch("LOAD_DETAIL", this.id);
     },
     mounted() {
       // this.data = this.$store.state.detail;//
@@ -57,15 +59,21 @@
 
     },
     computed: {
+      title(){
+        return this.$store.state.detail.title
+      },
+      loading(){
+        return this.$store.state.loading
+      },
       markdown() {
-          if(!this.loading){
-            return marked(this.data.content)
+          if(!this.$store.state.loading){
+            return marked(this.$store.state.detail.content)
           }
           return '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>'
       }
     },
     watch: {
-      // '$route': 'fetchData'
+      
     },
     methods: {
       // fetchData(){
@@ -80,10 +88,10 @@
 <style lang="" scoped>
 *{
   line-height:1.5rem;
-   color: #999;
-    word-break: break-all;
-        word-wrap: break-word; 
-        white-space: pre-wrap;
+  color: #999;
+  word-break: break-all;
+  word-wrap: break-word; 
+  white-space: pre-wrap;
 }
 span{
   width: 50px;

@@ -10,23 +10,28 @@ Vue.use(vuex);
 const store = new vuex.Store({
     state:{
         checked:false,
+        loading:true,
         articles:{},
+        detail:{}, //add 2017.2.4
         result:null,
     },
    
     mutations:{
         SET_ARITCLES: (state, payload)=> {
             state.articles = payload.data;
-            window.sessionStorage.setItem('temp_articles',JSON.stringify(state.articles));
+            window.sessionStorage.setItem('temp_articles',JSON.stringify(state.articles)); //保存,查询的时候列表(数据)还原
             console.log("mutations articles");
             console.log(state.detail);
             
         },
         SET_DETAIL:(state,payload)=>{
-            window.sessionStorage.setItem('temp_detail',JSON.stringify(payload.data));
-            state.detail=JSON.parse(window.sessionStorage.getItem("temp_detail"));
-            console.log("mutations detail");
-            console.log(state.detail);
+            // window.sessionStorage.setItem('temp_detail',JSON.stringify(payload.data));
+            // state.detail=JSON.parse(window.sessionStorage.getItem("temp_detail"));
+            // console.log("mutations detail");
+            // console.log(state.detail);
+            state.loading= true;
+            state.detail = payload;
+            state.loading= false;
             
         },
         SET_CATE:(state,payload)=>{
@@ -68,20 +73,15 @@ const store = new vuex.Store({
                 context.commit("SET_ARITCLES",res)
             }).catch(err=>console.log(err))
         },
-        // LOAD_DETAIL:(context,id)=>{
-        //     axios.get("http://localhost:8000/articles/"+id+"/")
-        //     .then((res)=>{
-        //         context.commit("SET_DETAIL",res)
-        //         console.log("action,detail"+id);
-        //     }).catch(err=>console.log(err))
-        // },
+      
         LOAD_DETAIL({commit},id){
             axios.get("http://localhost:8000/articles/"+id+"/")
             .then(res =>{
-                commit("SET_DETAIL",res);
-                console.log("data:"+res.data);
+                commit("SET_DETAIL",res.data);
+                // self.filterUsers();
             })
         },
+
         LOAD_CATE:({commit},payload)=>{
             commit("SET_CATE",payload)
         },
