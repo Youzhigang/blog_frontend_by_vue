@@ -1,27 +1,35 @@
 <template>
-  <div class="main">
-    
+  <div class="main" tabindex="0" v-focus 
+  @keyup.enter="test" 
+  @keydown.left="previous_page"
+  @keydown.right.prevent="next_page">
+   
     <template v-if="loading">
         <h2><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></h2>
     </template >
     <template v-else>
-         
          <section >
-            <h2 class="title"> {{data.title}}</h2>
+            <h2 class="title"> {{data.title}}</h2> 
+            <h4  class ="page">
+              <a @click="previous_page">Previous</a>
+              <a @click="next_page">Next</a>
+            </h4>
             <div class="word" v-html="markdown"></div>
          </section>
     </template>
+     
   </div>
 </template>
 <script>
   import '../assets/dracula.css'
   import marked from 'marked'
   import axios from 'axios'
+  import {mapGetters} from 'vuex'
 
   marked.setOptions({
     gfm: true,
     tables: true,
-    breaks: false,
+    breaks: true,
     pedantic: false,
     sanitize: true,
     smartLists: true,
@@ -30,6 +38,8 @@
       return require('highlight.js').highlightAuto(code).value;
     }
   });
+
+
 
   export default {
     name: "main",
@@ -43,13 +53,8 @@
 
     created() {
       this.id = this.$route.params.id;
-      axios.get("http://localhost:8000/articles/" + this.id + "/")
-        .then(res => {
-          this.loading = false;
-          this.data = res.data;
-          console.log(this.data)
-        })
-
+     
+      this.fetchData(this.id);
     },
     mounted() {
       // this.data = this.$store.state.detail;//
@@ -68,9 +73,47 @@
       // '$route': 'fetchData'
     },
     methods: {
-      // fetchData(){
-      //     this.$store.dispatch("LOAD_DETAIL",this.id)
-      // }
+      test(){
+        console.log(1213)
+      },
+      fetchData(id){
+        axios.get("http://localhost:8000/articles/" + id + "/")
+        .then(res => {
+          this.loading = false;
+          this.data = res.data;
+          console.log(this.data)
+        })
+          
+      },
+      ...mapGetters([
+        "getIDList"
+      ]),
+      previous_page(){
+        // console.log(123)
+        let ids = this.getIDList();
+        // console.log(ids)
+        let index=ids.indexOf(~~this.id)
+        // console.log(index)
+        if (index ==0 ){
+          this.id = ids[ids.length-1]
+        }else{
+          this.id = ids[index -1]
+        }
+        console.log(this.id)
+        this.$router.push({ path: '/content/'+(this.id)})
+        this.fetchData(this.id)
+      },
+      next_page(){
+         let ids = this.getIDList();
+         let index=ids.indexOf(~~this.id);
+         if (index ==(ids.length-1)){
+          this.id = ids[0]
+        }else{
+          this.id = ids[index + 1]
+        }
+        this.$router.push({ path: '/content/'+(this.id)})
+        this.fetchData(this.id)
+      }
     }
 
   }
@@ -78,12 +121,30 @@
 </script>
 
 <style lang="" scoped>
+.main:focus{
+  
+  outline: none;
+}
+.page{
+  position: fixed;
+  top:180px;
+  right: 200px;
+  font-size: 1.2rem;
+  color: sandybrown;
+}
+.page a{
+  text-decoration: none;
+}
+
+.page a:hover{
+  font-style: italic;
+  transition: 0.5s;
+}
 *{
   line-height:1.5rem;
-   color: #999;
-    word-break: break-all;
-        word-wrap: break-word; 
-        white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word; 
+  white-space: pre-wrap;
 }
 span{
   width: 50px;
@@ -107,7 +168,7 @@ span{
   section {
     text-align: left;
     background-color: #012;
-    width: 90%;
+    width: 50rem;
     padding: 30px;
     font-size: 15px;
   }
@@ -120,7 +181,11 @@ span{
       padding-bottom: 10px;
       border-bottom: 1px wheat solid;
   }
+  .word{
+color: #999;
+  }
   .word code {
+     
       word-break: break-all;
       word-wrap: break-word; 
       white-space: pre-wrap;

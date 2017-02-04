@@ -110,6 +110,10 @@ const store = new vuex.Store({
         },
         getResult:state=>{
             return state.result
+        },
+        getIDList:state=>{
+            return state.articles.results?
+            state.articles.results.map(item =>item.id):[]
         }
     },
     modules:{
