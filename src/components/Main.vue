@@ -126,8 +126,8 @@
   outline: none;
 }
 .page{
-  position: fixed;
-  top:180px;
+  position: absolute;
+  top:100px;
   right: 200px;
   font-size: 1.2rem;
   color: sandybrown;

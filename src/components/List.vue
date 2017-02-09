@@ -2,7 +2,7 @@
     <div class="list">
         <h1>Content</h1>
         <template v-if="!list || list.length==0">
-            <h2>Sorry, No result! Only search for the TAG!</h2>
+            <h2>Sorry, No result! Only search for the TAG Or check you Network!</h2>
         </template >
         <template v-else>
             <transition-group name="flip-list" tag="ul">
@@ -36,7 +36,7 @@ import {mapMutations} from 'vuex'
         data(){
             return{
                 article_list:[],
-                
+                timer:'',
             }
         },
         computed:{
@@ -52,14 +52,21 @@ import {mapMutations} from 'vuex'
             }
         },
         created(){
-            this.article_list = JSON.parse(window.sessionStorage.getItem("temp_articles")).results
-            setInterval(()=>{
-                this.SHUFFLE();console.log(123)
-            },10000)
+            this.article_list =[] || 
+            JSON.parse(window.sessionStorage.getItem("temp_articles")).results
+            this.timer = setInterval(()=>{
+                this.SHUFFLE();
+                console.log(this.timer);
+            },8000)
         },
         mounted () {
 
         },
+        beforeDestroy () {
+            clearInterval(this.timer);
+            console.log('beforeDestroy')
+        }
+        ,
         methods: {
             linkTo(val){
                 // this.$store.dispatch("LOAD_DETAIL",val)
@@ -78,7 +85,7 @@ import {mapMutations} from 'vuex'
 <style lang="stylus" scoped>
 
 .flip-list-move {
-  transition: transform 8s;
+  transition: transform 6s;
 }
 
 

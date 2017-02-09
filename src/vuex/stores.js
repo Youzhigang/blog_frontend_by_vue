@@ -12,6 +12,7 @@ const store = new vuex.Store({
         checked:false,
         articles:{},
         result:null,
+        scrolled:false,
     },
    
     mutations:{
