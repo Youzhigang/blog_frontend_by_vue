@@ -77,7 +77,8 @@
         console.log(1213)
       },
       fetchData(id){
-        axios.get("http://localhost:8000/articles/" + id + "/")
+        // axios.get("http://localhost:8000/articles/" + id + "/")
+        axios.get("/articles/" + id + "/")
         .then(res => {
           this.loading = false;
           this.data = res.data;
