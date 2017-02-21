@@ -49,7 +49,7 @@
         },
         methods:{
           goTop(){
-            window.scrollTo(0,0)
+           window.scrollTo(0,0)
           },
           search(){
             console.log(this.keyword)
@@ -62,7 +62,7 @@
           },
           handleScroll(){
             this.scrolled = window.scrollY>0
-            console.log(this.scrolled)
+            // console.log(this.scrolled)
           },
            ...mapActions({
           reset: 'START_RESET' 

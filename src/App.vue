@@ -7,8 +7,9 @@
     </div>
     <Handler></Handler>
   <div class="content">
-   <transition name="anileft" mode="out-in">
-      <router-view>
+   
+   <transition :name="transitionName">
+      <router-view class="child-view">
       </router-view>
     </transition>
   </div>
@@ -18,8 +19,6 @@
 <script>
 import Hello from './components/Header.vue'
 import Main from './components/Main.vue'
-import List from './components/List.vue'
-// import mybutton from './components/button.vue';
 import Category from './components/Categories.vue'
 import Posttime from './components/Posttimes.vue'
 import Handler from './components/Handler'
@@ -31,10 +30,14 @@ export default {
   
   components: {
     Hello,
-    List,
     Category,
     Posttime,
     Handler,
+  },
+  data () {
+    return {
+      transitionName: 'slide-left'
+    }
   },
   created(){
     
@@ -44,7 +47,18 @@ export default {
   },
   methods:{
     
-  }
+  },
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth > fromDepth ? 'slide-right' : 'slide-left'
+      console.log(this.transitionName)
+      if(this.transitionName === 'slide-right'){
+        setTimeout(()=>window.scrollTo(0,0),500)
+      }
+    }
+  },
 }
 </script>
 

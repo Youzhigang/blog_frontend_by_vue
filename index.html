@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>myapp</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <script src="http://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script>
     <Link type="text/css" rel="stylesheet" 
     href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
@@ -70,7 +70,46 @@
     bottom: 10px;
     z-index: -1;	
   }
+/*router transition*/
+/*.fade-enter-active, .fade-leave-active {
+  transition: opacity 15s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0;
+}*/
+.child-view {
+ 
+ transition: all 1.5s cubic-bezier(.55,0,.1,1);
+}
 
+
+.slide-right-enter{
+  
+  display: block;
+  transform: translate(10px, 3130px);  /*detail enter*/
+  
+}
+.slide-right-enter-activate{
+  opacity: 1;
+  /*display: block;*/
+}
+.slide-right-leave-active{
+  transform: translateX(500px); /*content 离开 ←*/
+  opacity: 0;
+}
+.slide-left-enter{
+  opacity: 0;
+  transform: translateY(-1000px);   /*content 进入*/
+}
+
+.slide-left-leave-active{
+  transform: translateY(-3000px); /*detail leave*/
+  
+}
+.slide-left-enter-activate{
+ opacity: 0; 
+ transform: translateX(1300px);
+}
 
 
     </style>

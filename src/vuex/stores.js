@@ -67,8 +67,8 @@ const store = new vuex.Store({
 
     actions:{
         LOAD_ARTICLES:(context)=>{
-            // axios.get("http://localhost:8000/articles/")
-             axios.get("/articles/")
+            axios.get("http://localhost:8000/articles/") //dev
+            //  axios.get("/articles/") //deploy
             .then((res)=>{
                 context.commit("SET_ARITCLES",res)
             }).catch(err=>console.log(err))
@@ -81,8 +81,8 @@ const store = new vuex.Store({
         //     }).catch(err=>console.log(err))
         // },
         LOAD_DETAIL({commit},id){
-            // axios.get("http://localhost:8000/articles/"+id+"/")
-             axios.get("/articles/"+id+"/")
+            axios.get("http://localhost:8000/articles/"+id+"/")//dev
+            //  axios.get("/articles/"+id+"/") //deploy
             .then(res =>{
                 commit("SET_DETAIL",res);
                 console.log("data:"+res.data);

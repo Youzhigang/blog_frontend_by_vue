@@ -1,4 +1,5 @@
 <template>
+
   <div class="main" tabindex="0" v-focus 
   @keyup.enter="test" 
   @keydown.left="previous_page"
@@ -77,8 +78,8 @@
         console.log(1213)
       },
       fetchData(id){
-        // axios.get("http://localhost:8000/articles/" + id + "/")
-        axios.get("/articles/" + id + "/")
+        axios.get("http://localhost:8000/articles/" + id + "/") //dev
+        // axios.get("/articles/" + id + "/") //deploy
         .then(res => {
           this.loading = false;
           this.data = res.data;
