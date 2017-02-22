@@ -21,11 +21,11 @@
         list-style: none;
         text-align: left
       }
-      #app{
+      /*#app{
         display: flex;
        
         justify-content: space-between;
-      }
+      }*/
 .paperbox::before {
     -webkit-transform: skew(-15deg) rotate(-6deg);
     -moz-transform: skew(-15deg) rotate(-6deg);
@@ -71,12 +71,6 @@
     z-index: -1;	
   }
 /*router transition*/
-/*.fade-enter-active, .fade-leave-active {
-  transition: opacity 15s ease;
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0;
-}*/
 .child-view {
  
  transition: all 1.5s cubic-bezier(.55,0,.1,1);
@@ -85,28 +79,33 @@
 
 .slide-right-enter{
   
-  display: block;
-  transform: translate(10px, 3130px);  /*detail enter*/
+  /*display: block;*/
+  transform: translate(0px, -150%);  /*detail enter*/
   
 }
 .slide-right-enter-activate{
-  opacity: 1;
+  opacity: 0;
   /*display: block;*/
+  transform: translate(0px, 1500%);
 }
 .slide-right-leave-active{
-  transform: translateX(500px); /*content 离开 ←*/
+
+  transform: translateX(150%); /*content 离开 ←*/
   opacity: 0;
+  display: none;
 }
 .slide-left-enter{
   opacity: 0;
-  transform: translateY(-1000px);   /*content 进入*/
+  transform: translateY(-150%);   /*content 进入*/
 }
 
 .slide-left-leave-active{
-  transform: translateY(-3000px); /*detail leave*/
+  opacity: 0;
+  transform: translateX(150%); /* detail leave*/
   
 }
 .slide-left-enter-activate{
+ display: none;
  opacity: 0; 
  transform: translateX(1300px);
 }

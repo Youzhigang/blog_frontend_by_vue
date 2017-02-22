@@ -54,9 +54,8 @@ export default {
       const fromDepth = from.path.split('/').length
       this.transitionName = toDepth > fromDepth ? 'slide-right' : 'slide-left'
       console.log(this.transitionName)
-      if(this.transitionName === 'slide-right'){
-        setTimeout(()=>window.scrollTo(0,0),500)
-      }
+      
+      
     }
   },
 }
@@ -74,22 +73,17 @@ export default {
   margin-top: 60px;
 }
 .left{
-  order: -1;
-  width: 15%;
-  margin: 20px;
+  float: left;
+  width: 180px;
+  margin: 20px 10px 10px;
   padding: 20px;
 }
 .content{
-   flex: 1;
-   
+  float: right;
+  width: 1000px;
+  margin-right:100px; 
+  margin-top: 10px;
+  z-index: 999;
 }
-.content .anileft-transition{
-  transition:2s;
-}
-.content .anileft-enter{
-  transform: translateX(1000%);
-}
-.content .anileft-leave{
- transform: translateX(1000%);
-}
+
 </style>
