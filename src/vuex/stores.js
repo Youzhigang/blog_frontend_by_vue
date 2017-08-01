@@ -14,21 +14,21 @@ const store = new vuex.Store({
         result:null,
         scrolled:false,
     },
-   
+
     mutations:{
         SET_ARITCLES: (state, payload)=> {
             state.articles = payload.data;
             window.sessionStorage.setItem('temp_articles',JSON.stringify(state.articles));
             console.log("mutations articles");
             console.log(state.detail);
-            
+
         },
         SET_DETAIL:(state,payload)=>{
             window.sessionStorage.setItem('temp_detail',JSON.stringify(payload.data));
             state.detail=JSON.parse(window.sessionStorage.getItem("temp_detail"));
             console.log("mutations detail");
             console.log(state.detail);
-            
+
         },
         SET_CATE:(state,payload)=>{
             console.log('----'+payload)
@@ -62,12 +62,12 @@ const store = new vuex.Store({
         SHUFFLE:state=>{
             state.articles.results=_.shuffle(state.articles.results)
         }
-        
+
     },
 
     actions:{
         LOAD_ARTICLES:(context)=>{
-            axios.get("http://localhost:8000/articles/") //dev
+            axios.get("/articles") //dev
             //  axios.get("/articles/") //deploy
             .then((res)=>{
                 context.commit("SET_ARITCLES",res)
@@ -81,7 +81,7 @@ const store = new vuex.Store({
         //     }).catch(err=>console.log(err))
         // },
         LOAD_DETAIL({commit},id){
-            axios.get("http://localhost:8000/articles/"+id+"/")//dev
+            axios.get("/articles/"+id)//dev
             //  axios.get("/articles/"+id+"/") //deploy
             .then(res =>{
                 commit("SET_DETAIL",res);
